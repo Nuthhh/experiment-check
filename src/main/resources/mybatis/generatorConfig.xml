@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="MyBatis3" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://39.105.156.250:3306/ysu"
+                        userId="hjg"
+                        password="Root213!">
+        </jdbcConnection>
+        <!-- model配置 -->
+        <javaModelGenerator targetPackage="com.ysu.db.pojo" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+
+        <!-- dao配置 -->
+        <sqlMapGenerator targetPackage="com.ysu.db.mapper" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.ysu.db.dao" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!-- forschool -->
+        <!--<table tableName="sc_sms_notice_person" domainObjectName="SmsNoticePerson"
+         enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" enableCountByExample="false"></table>
+           <table tableName="sc_user" domainObjectName="User"
+           enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" enableCountByExample="false"></table>
+           -->
+        <table tableName="test" domainObjectName="Test"
+               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
+               enableCountByExample="false"></table>
+        <!--<table tableName="us_liveclass_record" domainObjectName="LiveclassRecord"-->
+        <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" enableCountByExample="false"></table>-->
+
+    </context>
+</generatorConfiguration>
