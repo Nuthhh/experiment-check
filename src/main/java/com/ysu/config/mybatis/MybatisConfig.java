@@ -1,6 +1,4 @@
-package com.ysu.config.mybatis;/**
- * Created by 韩建国 on 2019/2/17
- */
+package com.ysu.config.mybatis;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.ysu.config.mybatis.datasource.DynamicDataSource;

@@ -11,6 +11,9 @@ public class ReturnObject {
 
     private Object data;
 
+    public ReturnObject() {
+    }
+
     public ReturnResult getResult() {
         return result;
     }
@@ -23,7 +26,8 @@ public class ReturnObject {
         return data;
     }
 
-    public void setData(Object data) {
+    public ReturnObject setData(Object data) {
         this.data = data;
+        return this;
     }
 }

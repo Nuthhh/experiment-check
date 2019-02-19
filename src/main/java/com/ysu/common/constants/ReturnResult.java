@@ -10,6 +10,9 @@ public class ReturnResult {
     private Integer code;
     private String msg;
 
+    public ReturnResult() {
+    }
+
     public Integer getCode() {
         return code;
     }

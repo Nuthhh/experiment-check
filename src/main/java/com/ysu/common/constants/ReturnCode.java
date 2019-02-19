@@ -73,7 +73,7 @@ public class ReturnCode {
      */
     public void throwFailedException(String logExtendMessage, Object data, Throwable throwable) {
         ReturnObject returnObject = toObject(data);
-        // throw new ReturnObjectException(returnObject, logExtendMessage, throwable);
+        throw new ReturnObjectException(returnObject, logExtendMessage, throwable);
     }
 
 
