@@ -11,13 +11,6 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.util.Map;
 
-/**
- * @author gaoxinshuai
- * @description
- * @company 天学网
- * @package com.up366.demo.interfaces.remote
- * @create 2018/2/22
- */
 public class HttpClientUtil {
 
     private static final Logger logger = LogManager.getLogger(HttpClientUtil.class);

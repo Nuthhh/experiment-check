@@ -3,10 +3,6 @@ package com.ysu.common.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 分页加工类
- * @author alan_c 2013-06-17
- */
 public class PagerBean {
 	@SuppressWarnings("unchecked")
 	private List list = new ArrayList();

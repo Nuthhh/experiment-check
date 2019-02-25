@@ -1,9 +1,5 @@
 package com.ysu.common.utils;
 
-/*
- * From www.JavaExchange.com, Open Software licensing
- */
-
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.MessageDigest;

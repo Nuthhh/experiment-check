@@ -17,5 +17,5 @@ public interface IReportService extends BaseReturnCode {
      * @auther: han jianguo
      * @date: 2019/2/22 17:53
      */
-    ReturnObject dealReport(String url);
+    ReturnObject dealReport(String url,Integer expId,Integer stuId);
 }

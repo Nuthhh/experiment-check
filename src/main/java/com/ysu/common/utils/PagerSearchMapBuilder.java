@@ -3,11 +3,6 @@ package com.ysu.common.utils;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * 专门用于构建分页查询中的Map信息, 可以直接通过#{@link PagerSearchMapBuilder#on(Pager)} 或者 #{@link PagerSearchMapBuilder#empty()} 来进行构建,最后通过toSearchMap()方法来进行构建结果
- *
- * @author 刘晗
- */
 public class PagerSearchMapBuilder {
 
     private Map<String, Object> searchMap = new HashMap<String, Object>();

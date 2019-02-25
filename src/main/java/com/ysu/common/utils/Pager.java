@@ -5,10 +5,6 @@ import com.ysu.common.constants.Constants;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * 分页加工类
- * @author alan_c 2013-06-17
- */
 public class Pager {
 	private int offset = 0; // 当前偏移，从0开始
 	private int pageSize = 0; // 分页大小

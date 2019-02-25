@@ -23,4 +23,7 @@ public interface Constants {
 
     // 文件服务器地址
     String FILE_SERVER_ADDRESS_PRE = "http://39.105.156.250/file/";
+
+    // 汉明距离
+    Integer HAMMING_DISTANCE_WARN = 3;
 }
