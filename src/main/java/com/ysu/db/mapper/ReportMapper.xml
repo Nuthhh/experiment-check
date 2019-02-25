@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysu.db.dao.ReportMapper">
+    <resultMap id="BaseResultMap" type="com.ysu.db.pojo.Report">
+        <id column="pkid" jdbcType="CHAR" property="pkid"/>
+        <result column="exp_id" jdbcType="INTEGER" property="expId"/>
+        <result column="stu_id" jdbcType="INTEGER" property="stuId"/>
+        <result column="path" jdbcType="VARCHAR" property="path"/>
+        <result column="simhash" jdbcType="CHAR" property="simhash"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    pkid, exp_id, stu_id, path, simhash, create_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ysu_report
+        where pkid = #{pkid,jdbcType=CHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ysu_report
+    where pkid = #{pkid,jdbcType=CHAR}
+  </delete>
+    <insert id="insert" parameterType="com.ysu.db.pojo.Report">
+    insert into ysu_report (pkid, exp_id, stu_id, 
+      path, simhash, create_time
+      )
+    values (#{pkid,jdbcType=CHAR}, #{expId,jdbcType=INTEGER}, #{stuId,jdbcType=INTEGER}, 
+      #{path,jdbcType=VARCHAR}, #{simhash,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.ysu.db.pojo.Report">
+        insert into ysu_report
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pkid != null">
+                pkid,
+            </if>
+            <if test="expId != null">
+                exp_id,
+            </if>
+            <if test="stuId != null">
+                stu_id,
+            </if>
+            <if test="path != null">
+                path,
+            </if>
+            <if test="simhash != null">
+                simhash,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pkid != null">
+                #{pkid,jdbcType=CHAR},
+            </if>
+            <if test="expId != null">
+                #{expId,jdbcType=INTEGER},
+            </if>
+            <if test="stuId != null">
+                #{stuId,jdbcType=INTEGER},
+            </if>
+            <if test="path != null">
+                #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="simhash != null">
+                #{simhash,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ysu.db.pojo.Report">
+        update ysu_report
+        <set>
+            <if test="expId != null">
+                exp_id = #{expId,jdbcType=INTEGER},
+            </if>
+            <if test="stuId != null">
+                stu_id = #{stuId,jdbcType=INTEGER},
+            </if>
+            <if test="path != null">
+                path = #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="simhash != null">
+                simhash = #{simhash,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where pkid = #{pkid,jdbcType=CHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ysu.db.pojo.Report">
+    update ysu_report
+    set exp_id = #{expId,jdbcType=INTEGER},
+      stu_id = #{stuId,jdbcType=INTEGER},
+      path = #{path,jdbcType=VARCHAR},
+      simhash = #{simhash,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where pkid = #{pkid,jdbcType=CHAR}
+  </update>
+
+    <!-- 自定义接口 -->
+    <select id="selectReportBeforeNowByExpId" resultMap="BaseResultMap" parameterType="map">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM ysu_report
+        WHERE exp_id= #{expId,jdbcType=INTEGER} AND create_time &lt; NOW()
+        AND stu_id &lt;&gt; #{stuId,jdbcType=INTEGER};
+    </select>
+
+</mapper>
