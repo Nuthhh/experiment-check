@@ -10,7 +10,6 @@ import com.ysu.common.constants.ReturnObject;
  **/
 public interface IReportService extends BaseReturnCode {
 
-
     /**
      *
      * 功能描述: 计算实验报告SimHash、Hamming Distance

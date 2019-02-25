@@ -11,11 +11,11 @@ import com.ysu.textsimilarity.SimHash;
 public class TextTest {
 
     public static void main(String[] args) {
-        SimHash h1 = new SimHash(FileUtil.readDocx("D:\\GPU.docx"));
-        SimHash h2 = new SimHash(FileUtil.readDocx("D:\\GPU2.docx"));
+        SimHash h1 = new SimHash(FileUtil.readWord("D:\\GPU.docx"));
+        SimHash h2 = new SimHash(FileUtil.readWord("D:\\GPU2.docx"));
         System.out.println(h1.getStrSimHash());
         System.out.println(h2.getStrSimHash());
-        System.out.println("距离："+HammingDistance.getDistance(h1.getStrSimHash(),h2.getStrSimHash()));
+        System.out.println("距离：" + HammingDistance.getDistance(h1.getStrSimHash(), h2.getStrSimHash()));
 
 
     }

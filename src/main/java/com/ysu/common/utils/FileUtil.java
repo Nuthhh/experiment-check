@@ -2,14 +2,22 @@ package com.ysu.common.utils;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+import org.apache.poi.POIXMLDocument;
+import org.apache.poi.POIXMLTextExtractor;
+import org.apache.poi.hwpf.extractor.WordExtractor;
+import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
+import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.xmlbeans.XmlException;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 
 /**
  * @Auther: han jianguo
@@ -17,6 +25,10 @@ import java.io.IOException;
  * @Description:
  **/
 public class FileUtil {
+
+    // word文档报告后缀
+    private static final String WORD_SUF_DOC = "doc";
+    private static final String WORD_SUF_DOCX = "docx";
 
     /**
      * 功能描述: 单文件上传到文件服务器
@@ -77,20 +89,26 @@ public class FileUtil {
     }
 
     /**
-     * 功能描述: 读取本地word文档内容，支持格式 docx
+     * 功能描述: 读取本地word文档内容，支持格式 docx doc
      *
      * @auther: han jianguo
      * @date: 2019/2/14 13:55
      */
-    public static String readDocx(String path) {
+    public static String readWord(String path) {
         String context = "";
         try {
-            File file = new File(path);
-            FileInputStream fis = new FileInputStream(file);
-            XWPFDocument xdoc = new XWPFDocument(fis);
-            XWPFWordExtractor extractor = new XWPFWordExtractor(xdoc);
-            context = extractor.getText();
-            fis.close();
+            if (path.endsWith(WORD_SUF_DOC)) {
+                InputStream is = new FileInputStream(new File(path));
+                WordExtractor ex = new WordExtractor(is);
+                context = ex.getText();
+                ex.close();
+            } else if (path.endsWith(WORD_SUF_DOCX)) {
+                XWPFWordExtractor docx = new XWPFWordExtractor(POIXMLDocument.openPackage(path));
+                context = docx.getText();
+                docx.close();
+            } else {
+                return null;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,15 +116,33 @@ public class FileUtil {
     }
 
     /**
-     * 功能描述: 读取url上的word文档内容，支持格式 docx
+     * 功能描述: 读取url上的word文档内容，支持格式 doc
      *
      * @auther: han jianguo
      * @date: 2019/2/14 14:39
      */
-    public static String readDocxByUrl(String url) {
-        String context = "";
-        // todo
+    public static String readWordByUrl(String fileUrl) {
+        String context = new String();
+        int HttpResult; // 服务器返回的状态
+        try {
+            URL url = new URL(fileUrl); // 创建URL
+            URLConnection urlConn = url.openConnection(); // 试图连接并取得返回状态码
+            urlConn.connect();
+            HttpURLConnection httpConn = (HttpURLConnection) urlConn;
+            HttpResult = httpConn.getResponseCode();
+            // 判断连接是否成功，不成功返回null
+            if (HttpResult != HttpURLConnection.HTTP_OK) {
+                return null;
+            }
+            BufferedInputStream bis = new BufferedInputStream(urlConn.getInputStream());
+            WordExtractor extractor = new WordExtractor(bis);
+            context = extractor.getText();
 
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return context;
     }
 
