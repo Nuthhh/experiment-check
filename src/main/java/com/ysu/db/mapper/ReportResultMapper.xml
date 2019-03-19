@@ -117,4 +117,25 @@
             #{item.createTime,jdbcType=TIMESTAMP})
         </foreach>
     </insert>
+
+    <select id="countCopyByExpId" parameterType="integer" resultType="java.lang.Integer">
+        SELECT COUNT(pkid) FROM ysu_report_result
+        WHERE exp_id = #{expId,jdbcType=INTEGER};
+    </select>
+
+    <select id="getCopyList" parameterType="map" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM ysu_report_result
+        WHERE exp_id = #{expId,jdbcType=INTEGER}
+        <include refid="pageLimit"/>;
+    </select>
+
+    <sql id="pageLimit">
+        <if test="pageNo != null and pageSize != null">
+            limit #{pageNo,jdbcType=INTEGER} , #{pageSize,jdbcType=INTEGER}
+        </if>
+    </sql>
+
+
 </mapper>

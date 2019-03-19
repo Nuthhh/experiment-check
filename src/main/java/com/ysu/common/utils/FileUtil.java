@@ -39,7 +39,7 @@ public class FileUtil {
      * @auther: han jianguo
      * @date: 2019/2/22 17:16
      */
-    public static String uploadOneFile(MultipartFile file, String url) throws IOException {
+    public static String uploadOneFile(MultipartFile file, String url) {
 
         // 上传文件原名
         String fileName = file.getOriginalFilename();
@@ -54,7 +54,11 @@ public class FileUtil {
         //这里需注意，为以后下载时能还原为原先的文件名称，需要在数据库储存一个服武器文件名和原先文件名的对照表。
         WebResource webresource = client.resource(url + fileNewName);
         //上传文件，第一个参数不懂
-        webresource.put(String.class, file.getBytes());
+        try {
+            webresource.put(String.class, file.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return fileNewName;
     }
@@ -65,7 +69,7 @@ public class FileUtil {
      * @auther: han jianguo
      * @date: 2019/2/22 17:17
      */
-    public static String uploadManyFiles(@RequestParam("matUrl") MultipartFile[] matUrl, String url) throws IOException {
+    public static String uploadManyFiles(@RequestParam("matUrl") MultipartFile[] matUrl, String url) {
         //说明：多文件需要在后台使用数组接受，其前面需要加 @RequestParam注解才能接收，注解括号里的名称①如果是前后端分类，则是vue定义的data里变量的名称；②如果是jsp文件，则是id的名称
         //重复调用单文件上传即可
         for (MultipartFile mat : matUrl) {

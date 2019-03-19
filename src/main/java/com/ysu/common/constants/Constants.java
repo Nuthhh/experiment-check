@@ -21,9 +21,9 @@ public interface Constants {
     String REQUEST_PAPER_PAGE_PRE_ID_NAME = "pager.id"; // 请求参数中的请求页面前一个id属性信息
     String REQUEST_PAPER_PAGE_PRE_FLOOR_NAME = "pager.floor"; // 请求参数中的请求页面前一个楼层属性信息
 
-    // 文件服务器地址
-    String FILE_SERVER_ADDRESS_PRE = "http://39.105.156.250/file/";
 
-    // 汉明距离
-    Integer HAMMING_DISTANCE_WARN = 3;
+    String FILE_SERVER_ADDRESS_PRE = "http://39.105.156.250/"; // 文件服务器地址
+    String REPORT_SERVER_ADRESS_PRE = "file/document/"; // 实验报告上传地址
+
+    Integer HAMMING_DISTANCE_WARN = 3;  // 汉明距离
 }

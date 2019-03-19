@@ -4,6 +4,8 @@ import com.ysu.common.constants.Constants;
 import com.ysu.common.constants.ReturnObject;
 import com.ysu.common.utils.FileUtil;
 import com.ysu.common.utils.GUID;
+import com.ysu.common.utils.Pager;
+import com.ysu.common.utils.PagerSearchMapBuilder;
 import com.ysu.db.dao.ReportMapper;
 import com.ysu.db.dao.ReportResultMapper;
 import com.ysu.db.pojo.Report;
@@ -31,6 +33,8 @@ public class ReportService implements IReportService {
 
     @Override
     public ReturnObject dealReport(String url, Integer expId, Integer stuId) {
+
+        // todo 先不考虑对于学生重复提交的问题，对于每次学生提交的实验报告都当做一个新的记录
 
         // 读取文档内容
         String context = FileUtil.readWordByUrl(url);
@@ -68,5 +72,19 @@ public class ReportService implements IReportService {
         reportResultMapper.batchInsert(results);
 
         return SUCCESS.emptyObject();
+    }
+
+    @Override
+    public ReturnObject getCopyList(Integer expId, Pager pager) {
+
+        Map<String, Object> param = PagerSearchMapBuilder.on(pager)
+                .append("expId", expId).toSearchMap();
+
+        int count = reportResultMapper.countCopyByExpId(expId);
+        List<ReportResult> list = new ArrayList<>();
+        if (count > 0) {
+            list = reportResultMapper.getCopyList(param);
+        }
+        return SUCCESS.toObject(pager.toShowPageBean(count, list));
     }
 }
