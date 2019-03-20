@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  * @Description:
  **/
 @RestController
-@RequestMapping("/client/report")
+@RequestMapping("/report")
 public class ReportController extends BaseController {
 
     @Autowired

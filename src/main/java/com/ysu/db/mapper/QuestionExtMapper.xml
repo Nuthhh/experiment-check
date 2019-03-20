@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysu.db.dao.QuestionExtMapper">
+  <resultMap id="BaseResultMap" type="com.ysu.db.pojo.QuestionExt">
+    <id column="question_id" jdbcType="CHAR" property="questionId" />
+    <result column="context" jdbcType="VARCHAR" property="context" />
+    <result column="example" jdbcType="VARCHAR" property="example" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    question_id, context, example, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ysu_question_ext
+    where question_id = #{questionId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ysu_question_ext
+    where question_id = #{questionId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ysu.db.pojo.QuestionExt">
+    insert into ysu_question_ext (question_id, context, example, 
+      create_time, update_time)
+    values (#{questionId,jdbcType=CHAR}, #{context,jdbcType=VARCHAR}, #{example,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ysu.db.pojo.QuestionExt">
+    insert into ysu_question_ext
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="questionId != null">
+        question_id,
+      </if>
+      <if test="context != null">
+        context,
+      </if>
+      <if test="example != null">
+        example,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="questionId != null">
+        #{questionId,jdbcType=CHAR},
+      </if>
+      <if test="context != null">
+        #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="example != null">
+        #{example,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ysu.db.pojo.QuestionExt">
+    update ysu_question_ext
+    <set>
+      <if test="context != null">
+        context = #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="example != null">
+        example = #{example,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where question_id = #{questionId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ysu.db.pojo.QuestionExt">
+    update ysu_question_ext
+    set context = #{context,jdbcType=VARCHAR},
+      example = #{example,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where question_id = #{questionId,jdbcType=CHAR}
+  </update>
+</mapper>

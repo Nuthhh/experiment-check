@@ -34,7 +34,7 @@
            <table tableName="sc_user" domainObjectName="User"
            enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" enableCountByExample="false"></table>
            -->
-        <table tableName="ysu_report" domainObjectName="Report"
+        <table tableName="ysu_question_test" domainObjectName="QuestionTest"
                enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
                enableCountByExample="false"></table>
         <!--<table tableName="us_liveclass_record" domainObjectName="LiveclassRecord"-->

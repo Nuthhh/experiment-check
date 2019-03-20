@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysu.db.dao.QuestionTestMapper">
+    <resultMap id="BaseResultMap" type="com.ysu.db.pojo.QuestionTest">
+        <id column="pkid" jdbcType="CHAR" property="pkid"/>
+        <result column="question_id" jdbcType="CHAR" property="questionId"/>
+        <result column="question_in" jdbcType="VARCHAR" property="questionIn"/>
+        <result column="question_out" jdbcType="VARCHAR" property="questionOut"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    pkid, question_id, question_in, question_out, create_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ysu_question_test
+        where pkid = #{pkid,jdbcType=CHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ysu_question_test
+    where pkid = #{pkid,jdbcType=CHAR}
+  </delete>
+    <insert id="insert" parameterType="com.ysu.db.pojo.QuestionTest">
+    insert into ysu_question_test (pkid, question_id, question_in, 
+      question_out, create_time)
+    values (#{pkid,jdbcType=CHAR}, #{questionId,jdbcType=CHAR}, #{questionIn,jdbcType=VARCHAR}, 
+      #{questionOut,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.ysu.db.pojo.QuestionTest">
+        insert into ysu_question_test
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pkid != null">
+                pkid,
+            </if>
+            <if test="questionId != null">
+                question_id,
+            </if>
+            <if test="questionIn != null">
+                question_in,
+            </if>
+            <if test="questionOut != null">
+                question_out,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pkid != null">
+                #{pkid,jdbcType=CHAR},
+            </if>
+            <if test="questionId != null">
+                #{questionId,jdbcType=CHAR},
+            </if>
+            <if test="questionIn != null">
+                #{questionIn,jdbcType=VARCHAR},
+            </if>
+            <if test="questionOut != null">
+                #{questionOut,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ysu.db.pojo.QuestionTest">
+        update ysu_question_test
+        <set>
+            <if test="questionId != null">
+                question_id = #{questionId,jdbcType=CHAR},
+            </if>
+            <if test="questionIn != null">
+                question_in = #{questionIn,jdbcType=VARCHAR},
+            </if>
+            <if test="questionOut != null">
+                question_out = #{questionOut,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where pkid = #{pkid,jdbcType=CHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ysu.db.pojo.QuestionTest">
+    update ysu_question_test
+    set question_id = #{questionId,jdbcType=CHAR},
+      question_in = #{questionIn,jdbcType=VARCHAR},
+      question_out = #{questionOut,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where pkid = #{pkid,jdbcType=CHAR}
+  </update>
+
+    <!-- 自定义接口 -->
+    <delete id="deleteByQuestionId" parameterType="string">
+        DELETE FROM ysu_question_test
+        WHERE question_id=#{questionId,jdbcType=VARCHAR};
+  </delete>
+
+    <select id="countTestByQuestionId" resultType="java.lang.Integer" parameterType="string">
+        SELECT COUNT(pkid) FROM ysu_question_test WHERE
+        question_id = #{questionId,jdbcType=VARCHAR};
+    </select>
+
+    <select id="getTestByQuestionId" parameterType="map" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM ysu_question_test WHERE
+        question_id = #{questionId,jdbcType=VARCHAR}
+        <include refid="pageLimit"/>;
+    </select>
+
+    <sql id="pageLimit">
+        <if test="pageNo != null and pageSize != null">
+            limit #{pageNo,jdbcType=INTEGER} , #{pageSize,jdbcType=INTEGER}
+        </if>
+    </sql>
+
+
+</mapper>
