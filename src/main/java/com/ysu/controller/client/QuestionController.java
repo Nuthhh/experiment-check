@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.soap.SAAJResult;
 
 /**
  * @Auther: han jianguo
@@ -19,7 +18,7 @@ import javax.xml.soap.SAAJResult;
  * @Description:
  **/
 @RestController
-@RequestMapping("/question")
+@RequestMapping("/question/teacher")
 public class QuestionController extends BaseController {
 
     @Autowired

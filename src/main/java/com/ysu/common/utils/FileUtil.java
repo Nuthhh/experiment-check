@@ -2,15 +2,9 @@ package com.ysu.common.utils;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.apache.poi.POIXMLDocument;
-import org.apache.poi.POIXMLTextExtractor;
 import org.apache.poi.hwpf.extractor.WordExtractor;
-import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
-import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.xmlbeans.XmlException;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -77,6 +71,23 @@ public class FileUtil {
         }
 
         return "";
+    }
+
+    /**
+     * 功能描述: 将指定内容（String类型）以文件的形式储存到文件服务器
+     *
+     * @param context  指定内容
+     * @param url      文件服务器地址
+     * @param fileName 文件的名称
+     * @auther: han jianguo
+     * @date: 2019/3/22 9:59
+     */
+    public static void uploadString(String context, String url, String fileName) {
+
+        // 上传
+        Client client = new Client();
+        WebResource webresource = client.resource(url + fileName);
+        webresource.put(String.class, context.getBytes());
     }
 
     /**

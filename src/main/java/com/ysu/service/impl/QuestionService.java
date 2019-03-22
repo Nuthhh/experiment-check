@@ -68,7 +68,6 @@ public class QuestionService implements IQuestionService {
                 .append("name", questionName).toSearchMap();
 
         int count = questionMapper.countQuestionByName(questionName);
-        System.out.println("count:" + count);
         List<Question> list = new ArrayList<>();
         if (count > 0) {
             list = questionMapper.selectQuestionByName(param);

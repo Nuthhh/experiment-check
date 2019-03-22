@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysu.db.dao.ExeResultMapper">
+  <resultMap id="BaseResultMap" type="com.ysu.db.pojo.ExeResult">
+    <id column="exe_id" jdbcType="CHAR" property="exeId" />
+    <result column="lang" jdbcType="SMALLINT" property="lang" />
+    <result column="time" jdbcType="INTEGER" property="time" />
+    <result column="memory" jdbcType="INTEGER" property="memory" />
+    <result column="code" jdbcType="SMALLINT" property="code" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    exe_id, lang, time, memory, code, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ysu_exe_result
+    where exe_id = #{exeId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ysu_exe_result
+    where exe_id = #{exeId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ysu.db.pojo.ExeResult">
+    insert into ysu_exe_result (exe_id, lang, time, 
+      memory, code, create_time
+      )
+    values (#{exeId,jdbcType=CHAR}, #{lang,jdbcType=SMALLINT}, #{time,jdbcType=INTEGER}, 
+      #{memory,jdbcType=INTEGER}, #{code,jdbcType=SMALLINT}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ysu.db.pojo.ExeResult">
+    insert into ysu_exe_result
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="exeId != null">
+        exe_id,
+      </if>
+      <if test="lang != null">
+        lang,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="memory != null">
+        memory,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="exeId != null">
+        #{exeId,jdbcType=CHAR},
+      </if>
+      <if test="lang != null">
+        #{lang,jdbcType=SMALLINT},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=INTEGER},
+      </if>
+      <if test="memory != null">
+        #{memory,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ysu.db.pojo.ExeResult">
+    update ysu_exe_result
+    <set>
+      <if test="lang != null">
+        lang = #{lang,jdbcType=SMALLINT},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=INTEGER},
+      </if>
+      <if test="memory != null">
+        memory = #{memory,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where exe_id = #{exeId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ysu.db.pojo.ExeResult">
+    update ysu_exe_result
+    set lang = #{lang,jdbcType=SMALLINT},
+      time = #{time,jdbcType=INTEGER},
+      memory = #{memory,jdbcType=INTEGER},
+      code = #{code,jdbcType=SMALLINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where exe_id = #{exeId,jdbcType=CHAR}
+  </update>
+</mapper>

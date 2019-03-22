@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description:
  **/
 @RestController
-@RequestMapping("/questionExt")
+@RequestMapping("/questionExt/teacher")
 public class QuestionExtController extends BaseController {
 
     @Autowired

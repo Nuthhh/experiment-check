@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysu.db.dao.ExeMapper">
+  <resultMap id="BaseResultMap" type="com.ysu.db.pojo.Exe">
+    <id column="exe_id" jdbcType="CHAR" property="exeId" />
+    <result column="question_id" jdbcType="CHAR" property="questionId" />
+    <result column="stu_id" jdbcType="INTEGER" property="stuId" />
+    <result column="lang" jdbcType="SMALLINT" property="lang" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ysu.db.pojo.Exe">
+    <result column="context" jdbcType="LONGVARCHAR" property="context" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    exe_id, question_id, stu_id, lang, create_time
+  </sql>
+  <sql id="Blob_Column_List">
+    context
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ysu_exe
+    where exe_id = #{exeId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ysu_exe
+    where exe_id = #{exeId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ysu.db.pojo.Exe">
+    insert into ysu_exe (exe_id, question_id, stu_id, 
+      lang, create_time, context
+      )
+    values (#{exeId,jdbcType=CHAR}, #{questionId,jdbcType=CHAR}, #{stuId,jdbcType=INTEGER}, 
+      #{lang,jdbcType=SMALLINT}, #{createTime,jdbcType=TIMESTAMP}, #{context,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ysu.db.pojo.Exe">
+    insert into ysu_exe
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="exeId != null">
+        exe_id,
+      </if>
+      <if test="questionId != null">
+        question_id,
+      </if>
+      <if test="stuId != null">
+        stu_id,
+      </if>
+      <if test="lang != null">
+        lang,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="context != null">
+        context,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="exeId != null">
+        #{exeId,jdbcType=CHAR},
+      </if>
+      <if test="questionId != null">
+        #{questionId,jdbcType=CHAR},
+      </if>
+      <if test="stuId != null">
+        #{stuId,jdbcType=INTEGER},
+      </if>
+      <if test="lang != null">
+        #{lang,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="context != null">
+        #{context,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ysu.db.pojo.Exe">
+    update ysu_exe
+    <set>
+      <if test="questionId != null">
+        question_id = #{questionId,jdbcType=CHAR},
+      </if>
+      <if test="stuId != null">
+        stu_id = #{stuId,jdbcType=INTEGER},
+      </if>
+      <if test="lang != null">
+        lang = #{lang,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="context != null">
+        context = #{context,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where exe_id = #{exeId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ysu.db.pojo.Exe">
+    update ysu_exe
+    set question_id = #{questionId,jdbcType=CHAR},
+      stu_id = #{stuId,jdbcType=INTEGER},
+      lang = #{lang,jdbcType=SMALLINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      context = #{context,jdbcType=LONGVARCHAR}
+    where exe_id = #{exeId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ysu.db.pojo.Exe">
+    update ysu_exe
+    set question_id = #{questionId,jdbcType=CHAR},
+      stu_id = #{stuId,jdbcType=INTEGER},
+      lang = #{lang,jdbcType=SMALLINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where exe_id = #{exeId,jdbcType=CHAR}
+  </update>
+</mapper>

@@ -24,6 +24,10 @@ public interface Constants {
 
     String FILE_SERVER_ADDRESS_PRE = "http://39.105.156.250/"; // 文件服务器地址
     String REPORT_SERVER_ADRESS_PRE = "file/document/"; // 实验报告上传地址
+    String EXE_SERVER_ADDRESS_PRE = "file/test/"; // 学生提交程序储存临时地址
 
     Integer HAMMING_DISTANCE_WARN = 3;  // 汉明距离
+
+    Short EXE_LANG_JAVA = 1; // 程序编写语言为Java
+    Short EXE_LANG_CC = 2; // 程序编写语言为C++
 }
