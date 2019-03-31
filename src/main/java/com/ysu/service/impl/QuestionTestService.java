@@ -1,10 +1,8 @@
 package com.ysu.service.impl;
 
+import com.ysu.common.constants.Constants;
 import com.ysu.common.constants.ReturnObject;
-import com.ysu.common.utils.GUID;
-import com.ysu.common.utils.Pager;
-import com.ysu.common.utils.PagerSearchMapBuilder;
-import com.ysu.common.utils.Validator;
+import com.ysu.common.utils.*;
 import com.ysu.db.dao.QuestionTestMapper;
 import com.ysu.db.pojo.QuestionTest;
 import com.ysu.service.IQuestionTestService;
@@ -30,14 +28,10 @@ public class QuestionTestService implements IQuestionTestService {
     @Override
     public ReturnObject save(QuestionTest questionTest) {
 
-        if (Validator.isNull(questionTest.getPkid())) {
-            questionTest.setPkid(GUID.getGUID());
-            questionTest.setCreateTime(new Date());
-            questionTestMapper.insertSelective(questionTest);
-        } else {
-            questionTest.setCreateTime(new Date());
-            questionTestMapper.updateByPrimaryKeySelective(questionTest);
-        }
+        questionTest.setPkid(GUID.getGUID());
+        questionTest.setCreateTime(new Date());
+        questionTestMapper.insertSelective(questionTest);
+
         return SUCCESS.emptyObject();
     }
 
@@ -58,5 +52,11 @@ public class QuestionTestService implements IQuestionTestService {
             list = questionTestMapper.getTestByQuestionId(param);
         }
         return SUCCESS.toObject(pager.toShowPageBean(count, list));
+    }
+
+    @Override
+    public ReturnObject updateTestcase(String questionId) {
+        PythonUtil.runPython(Constants.PYTHON_COMMAND, Constants.PYTHON_SCRIPTPATH_UPDATE, questionId);
+        return SUCCESS.emptyObject();
     }
 }

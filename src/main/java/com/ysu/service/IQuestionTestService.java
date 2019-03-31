@@ -13,7 +13,7 @@ import com.ysu.db.pojo.QuestionTest;
 public interface IQuestionTestService extends BaseReturnCode {
 
     /**
-     * 功能描述: 添加、修改测试用例
+     * 功能描述: 添加测试用例
      *
      * @auther: han jianguo
      * @date: 2019/3/20 17:15
@@ -35,5 +35,14 @@ public interface IQuestionTestService extends BaseReturnCode {
      * @date: 2019/3/20 17:16
      */
     ReturnObject getQuestionTestList(String questionId,Pager pager);
+
+    /**
+     *
+     * 功能描述: 更新评测机的测试用例
+     *
+     * @auther: han jianguo
+     * @date: 2019/3/31 14:50
+     */
+    ReturnObject updateTestcase(String questionId);
 
 }

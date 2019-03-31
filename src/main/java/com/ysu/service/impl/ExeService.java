@@ -4,15 +4,15 @@ import com.ysu.common.constants.Constants;
 import com.ysu.common.constants.ReturnObject;
 import com.ysu.common.utils.FileUtil;
 import com.ysu.common.utils.GUID;
+import com.ysu.common.utils.PythonUtil;
 import com.ysu.db.dao.ExeMapper;
 import com.ysu.db.dao.ExeResultMapper;
 import com.ysu.db.pojo.Exe;
+import com.ysu.db.pojo.ExeResult;
 import com.ysu.service.IExeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -45,13 +45,16 @@ public class ExeService implements IExeService {
         FileUtil.uploadString(exe.getContext(), filePath, fileName.toString());
 
         // 将学生作答相关信息储存到数据库
-        exe.setExeId(GUID.getGUID());
+        String exeId = GUID.getGUID();
+        exe.setExeId(exeId);
         exe.setCreateTime(new Date());
         exeMapper.insert(exe);
 
         // 提交学生程序进行评测，获取评测结果
+        // exeId、程序路径、题目id、lang
+        PythonUtil.runPython(Constants.PYTHON_COMMAND, Constants.PYTHON_SCRIPTPATH_JUDGE, exeId, fileName.toString(), exe.getQuestionId(), String.valueOf(exe.getLang()));
+        ExeResult exeResult = exeResultMapper.selectByPrimaryKey(exeId);
 
-
-        return SUCCESS.emptyObject();
+        return SUCCESS.toObject(exeResult);
     }
 }

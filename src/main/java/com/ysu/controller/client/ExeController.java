@@ -1,6 +1,5 @@
 package com.ysu.controller.client;
 
-import com.sun.xml.internal.ws.server.ServerRtException;
 import com.ysu.common.constants.ReturnObject;
 import com.ysu.controller.base.BaseController;
 import com.ysu.db.pojo.Exe;

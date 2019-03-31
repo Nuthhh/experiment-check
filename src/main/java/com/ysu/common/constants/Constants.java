@@ -30,4 +30,9 @@ public interface Constants {
 
     Short EXE_LANG_JAVA = 1; // 程序编写语言为Java
     Short EXE_LANG_CC = 2; // 程序编写语言为C++
+
+    // 运行程序
+    String PYTHON_COMMAND = "python3";  // python在服务器中运行命令
+    String PYTHON_SCRIPTPATH_JUDGE = "/python/ysu-judge/api/judge.py"; // 评测脚本在服务器中的绝对路径
+    String PYTHON_SCRIPTPATH_UPDATE = "/python/ysu-judge/api/update_case.py"; // 评测脚本在服务器中的绝对路径
 }

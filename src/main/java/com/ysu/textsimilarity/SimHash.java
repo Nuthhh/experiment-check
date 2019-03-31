@@ -3,7 +3,6 @@ package com.ysu.textsimilarity;
 import com.hankcs.hanlp.HanLP;
 import com.hankcs.hanlp.seg.common.Term;
 
-import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -91,7 +90,6 @@ public class SimHash {
     }
 
     /**
-     *
      * 功能描述: 获得字符串的hash值
      *
      * @auther: han jianguo
@@ -122,7 +120,6 @@ public class SimHash {
 
 
     /**
-     *
      * 功能描述: TODO
      *
      * @auther: han jianguo
