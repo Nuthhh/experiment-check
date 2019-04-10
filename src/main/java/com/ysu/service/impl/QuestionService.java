@@ -9,7 +9,9 @@ import com.ysu.db.dao.QuestionExtMapper;
 import com.ysu.db.dao.QuestionMapper;
 import com.ysu.db.dao.QuestionTestMapper;
 import com.ysu.db.pojo.Question;
+import com.ysu.db.pojo.QuestionExt;
 import com.ysu.service.IQuestionService;
+import com.ysu.vo.QuestionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +52,32 @@ public class QuestionService implements IQuestionService {
     }
 
     @Override
+    public ReturnObject saveQuestionAll(Question question, QuestionExt questionExt) {
+
+        if (Validator.isNull(question.getQuestionId())) {
+            // 新增题目信息
+            question.setQuestionId(GUID.getGUID());
+            question.setCreateTime(new Date());
+            questionMapper.insertSelective(question);
+        } else {
+            // 修改题目信息
+            question.setUpdateTime(new Date());
+            questionMapper.updateByPrimaryKeySelective(question);
+        }
+
+        QuestionExt q = questionExtMapper.selectByPrimaryKey(questionExt.getQuestionId());
+        if (Validator.isNull(q)) {
+            questionExt.setCreateTime(new Date());
+            questionExtMapper.insertSelective(questionExt);
+        } else {
+            questionExt.setUpdateTime(new Date());
+            questionExtMapper.updateByPrimaryKeySelective(questionExt);
+        }
+
+        return SUCCESS.emptyObject();
+    }
+
+    @Override
     public ReturnObject deleteQuestion(String questionId) {
 
         if (Validator.isNull(questionId)) {
@@ -73,5 +101,11 @@ public class QuestionService implements IQuestionService {
             list = questionMapper.selectQuestionByName(param);
         }
         return SUCCESS.toObject(pager.toShowPageBean(count, list));
+    }
+
+    @Override
+    public ReturnObject getQuestionInfo(String questionId) {
+        QuestionInfo questionInfo = questionMapper.getQuestionInfo(questionId);
+        return SUCCESS.toObject(questionInfo);
     }
 }

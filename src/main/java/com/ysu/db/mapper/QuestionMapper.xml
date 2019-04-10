@@ -119,6 +119,19 @@
         <include refid="pageLimit"/>;
     </select>
 
+    <select id="getQuestionInfo" resultType="com.ysu.vo.QuestionInfo" parameterType="string">
+        SELECT
+        ysu_question.question_id questionId,
+        `name`,
+        time,
+        memory,
+        context,
+        example
+        FROM ysu_question
+        LEFT JOIN ysu_question_ext ON ysu_question.question_id = ysu_question_ext.question_id
+        WHERE ysu_question.question_id=#{questionId,jdbcType=VARCHAR};
+    </select>
+
     <sql id="pageLimit">
         <if test="pageNo != null and pageSize != null">
             limit #{pageNo,jdbcType=INTEGER} , #{pageSize,jdbcType=INTEGER}

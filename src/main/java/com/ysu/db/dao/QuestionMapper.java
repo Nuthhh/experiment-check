@@ -1,6 +1,7 @@
 package com.ysu.db.dao;
 
 import com.ysu.db.pojo.Question;
+import com.ysu.vo.QuestionInfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -34,4 +35,13 @@ public interface QuestionMapper {
      * @date: 2019/3/20 16:04
      */
     List<Question> selectQuestionByName(Map<String, Object> param);
+
+    /**
+     *
+     * 功能描述: 查询id下题目所有信息
+     *
+     * @auther: han jianguo
+     * @date: 2019/4/10 16:03
+     */
+    QuestionInfo getQuestionInfo(String questionId);
 }
