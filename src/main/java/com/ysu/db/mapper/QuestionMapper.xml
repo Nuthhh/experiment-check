@@ -116,6 +116,7 @@
         <include refid="Base_Column_List"/>
         FROM ysu_question
         WHERE `name` LIKE CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+        ORDER BY update_time DESC,create_time DESC
         <include refid="pageLimit"/>;
     </select>
 

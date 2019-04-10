@@ -85,7 +85,6 @@ public class QuestionController extends BaseController {
         question.setName(name);
         question.setTime(parseInt(time));
         question.setMemory(parseInt(memory));
-
         QuestionExt questionExt = new QuestionExt();
         questionExt.setQuestionId(questionId);
         questionExt.setContext(context);

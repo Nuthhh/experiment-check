@@ -59,17 +59,13 @@ public class QuestionService implements IQuestionService {
             question.setQuestionId(GUID.getGUID());
             question.setCreateTime(new Date());
             questionMapper.insertSelective(question);
+            questionExt.setQuestionId(question.getQuestionId());
+            questionExt.setCreateTime(new Date());
+            questionExtMapper.insertSelective(questionExt);
         } else {
             // 修改题目信息
             question.setUpdateTime(new Date());
             questionMapper.updateByPrimaryKeySelective(question);
-        }
-
-        QuestionExt q = questionExtMapper.selectByPrimaryKey(questionExt.getQuestionId());
-        if (Validator.isNull(q)) {
-            questionExt.setCreateTime(new Date());
-            questionExtMapper.insertSelective(questionExt);
-        } else {
             questionExt.setUpdateTime(new Date());
             questionExtMapper.updateByPrimaryKeySelective(questionExt);
         }
