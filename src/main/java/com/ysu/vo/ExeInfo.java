@@ -1,11 +1,23 @@
-package com.ysu.db.pojo;
+package com.ysu.vo;
 
 import java.util.Date;
 
-public class ExeResult {
+/**
+ * @Auther: han jianguo
+ * @Date: 2019/4/15 14:11
+ * @Description:
+ **/
+public class ExeInfo {
+
     private String exeId;
 
+    private String questionId;
+
+    private Integer stuId;
+
     private Short lang;
+
+    private String context;
 
     private Integer time;
 
@@ -15,12 +27,14 @@ public class ExeResult {
 
     private Date createTime;
 
-
     @Override
     public String toString() {
-        return "ExeResult{" +
+        return "ExeInfo{" +
                 "exeId='" + exeId + '\'' +
+                ", questionId='" + questionId + '\'' +
+                ", stuId=" + stuId +
                 ", lang=" + lang +
+                ", context='" + context + '\'' +
                 ", time=" + time +
                 ", memory=" + memory +
                 ", code=" + code +
@@ -28,12 +42,36 @@ public class ExeResult {
                 '}';
     }
 
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
     public String getExeId() {
         return exeId;
     }
 
     public void setExeId(String exeId) {
-        this.exeId = exeId == null ? null : exeId.trim();
+        this.exeId = exeId;
+    }
+
+    public String getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(String questionId) {
+        this.questionId = questionId;
+    }
+
+    public Integer getStuId() {
+        return stuId;
+    }
+
+    public void setStuId(Integer stuId) {
+        this.stuId = stuId;
     }
 
     public Short getLang() {
@@ -42,6 +80,14 @@ public class ExeResult {
 
     public void setLang(Short lang) {
         this.lang = lang;
+    }
+
+    public String getContext() {
+        return context;
+    }
+
+    public void setContext(String context) {
+        this.context = context;
     }
 
     public Integer getTime() {
@@ -66,13 +112,5 @@ public class ExeResult {
 
     public void setCode(Short code) {
         this.code = code;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
     }
 }

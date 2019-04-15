@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ysu.db.dao.ExeMapper">
-  <resultMap id="BaseResultMap" type="com.ysu.db.pojo.Exe">
-    <id column="exe_id" jdbcType="CHAR" property="exeId" />
-    <result column="question_id" jdbcType="CHAR" property="questionId" />
-    <result column="stu_id" jdbcType="INTEGER" property="stuId" />
-    <result column="lang" jdbcType="SMALLINT" property="lang" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ysu.db.pojo.Exe">
-    <result column="context" jdbcType="LONGVARCHAR" property="context" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.ysu.db.pojo.Exe">
+        <id column="exe_id" jdbcType="CHAR" property="exeId"/>
+        <result column="question_id" jdbcType="CHAR" property="questionId"/>
+        <result column="stu_id" jdbcType="INTEGER" property="stuId"/>
+        <result column="lang" jdbcType="SMALLINT" property="lang"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ysu.db.pojo.Exe">
+        <result column="context" jdbcType="LONGVARCHAR" property="context"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     exe_id, question_id, stu_id, lang, create_time
   </sql>
-  <sql id="Blob_Column_List">
+    <sql id="Blob_Column_List">
     context
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from ysu_exe
-    where exe_id = #{exeId,jdbcType=CHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from ysu_exe
+        where exe_id = #{exeId,jdbcType=CHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from ysu_exe
     where exe_id = #{exeId,jdbcType=CHAR}
   </delete>
-  <insert id="insert" parameterType="com.ysu.db.pojo.Exe">
+    <insert id="insert" parameterType="com.ysu.db.pojo.Exe">
     insert into ysu_exe (exe_id, question_id, stu_id, 
       lang, create_time, context
       )
@@ -37,71 +37,71 @@
       #{lang,jdbcType=SMALLINT}, #{createTime,jdbcType=TIMESTAMP}, #{context,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ysu.db.pojo.Exe">
-    insert into ysu_exe
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="exeId != null">
-        exe_id,
-      </if>
-      <if test="questionId != null">
-        question_id,
-      </if>
-      <if test="stuId != null">
-        stu_id,
-      </if>
-      <if test="lang != null">
-        lang,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="context != null">
-        context,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="exeId != null">
-        #{exeId,jdbcType=CHAR},
-      </if>
-      <if test="questionId != null">
-        #{questionId,jdbcType=CHAR},
-      </if>
-      <if test="stuId != null">
-        #{stuId,jdbcType=INTEGER},
-      </if>
-      <if test="lang != null">
-        #{lang,jdbcType=SMALLINT},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="context != null">
-        #{context,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ysu.db.pojo.Exe">
-    update ysu_exe
-    <set>
-      <if test="questionId != null">
-        question_id = #{questionId,jdbcType=CHAR},
-      </if>
-      <if test="stuId != null">
-        stu_id = #{stuId,jdbcType=INTEGER},
-      </if>
-      <if test="lang != null">
-        lang = #{lang,jdbcType=SMALLINT},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="context != null">
-        context = #{context,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where exe_id = #{exeId,jdbcType=CHAR}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ysu.db.pojo.Exe">
+    <insert id="insertSelective" parameterType="com.ysu.db.pojo.Exe">
+        insert into ysu_exe
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="exeId != null">
+                exe_id,
+            </if>
+            <if test="questionId != null">
+                question_id,
+            </if>
+            <if test="stuId != null">
+                stu_id,
+            </if>
+            <if test="lang != null">
+                lang,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="context != null">
+                context,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="exeId != null">
+                #{exeId,jdbcType=CHAR},
+            </if>
+            <if test="questionId != null">
+                #{questionId,jdbcType=CHAR},
+            </if>
+            <if test="stuId != null">
+                #{stuId,jdbcType=INTEGER},
+            </if>
+            <if test="lang != null">
+                #{lang,jdbcType=SMALLINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="context != null">
+                #{context,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ysu.db.pojo.Exe">
+        update ysu_exe
+        <set>
+            <if test="questionId != null">
+                question_id = #{questionId,jdbcType=CHAR},
+            </if>
+            <if test="stuId != null">
+                stu_id = #{stuId,jdbcType=INTEGER},
+            </if>
+            <if test="lang != null">
+                lang = #{lang,jdbcType=SMALLINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="context != null">
+                context = #{context,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where exe_id = #{exeId,jdbcType=CHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ysu.db.pojo.Exe">
     update ysu_exe
     set question_id = #{questionId,jdbcType=CHAR},
       stu_id = #{stuId,jdbcType=INTEGER},
@@ -110,7 +110,7 @@
       context = #{context,jdbcType=LONGVARCHAR}
     where exe_id = #{exeId,jdbcType=CHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ysu.db.pojo.Exe">
+    <update id="updateByPrimaryKey" parameterType="com.ysu.db.pojo.Exe">
     update ysu_exe
     set question_id = #{questionId,jdbcType=CHAR},
       stu_id = #{stuId,jdbcType=INTEGER},
@@ -118,4 +118,49 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where exe_id = #{exeId,jdbcType=CHAR}
   </update>
+
+    <!-- 以下是自定义接口 -->
+    <select id="selectStudentAnswerByQuestionId" resultType="com.ysu.vo.ExeTeacher" parameterType="map">
+        SELECT
+        e.stu_id stuId,
+        if(FIND_IN_SET(0,GROUP_CONCAT(r.`code`))=1,1,0) pass,
+        COUNT(e.stu_id) submitSum,
+        MAX(e.create_time) createTime
+        FROM ysu_exe e
+        LEFT JOIN ysu_exe_result r ON e.exe_id = r.exe_id
+        WHERE e.question_id = #{questionId,jdbcType=VARCHAR}
+        GROUP BY e.stu_id
+        <include refid="pageLimit"/>
+    </select>
+
+    <select id="countStudentAnswerByQuestionId" resultType="java.lang.Integer" parameterType="string">
+        SELECT
+        COUNT(DISTINCT stu_id)
+        FROM ysu_exe
+        WHERE question_id = #{questionId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectAnswerByQuestionIdAndStuId" resultType="com.ysu.vo.ExeInfo" parameterType="map">
+        SELECT
+        e.exe_id exeId,
+        e.question_id questionId,
+        e.stu_id stuId,
+        e.lang,
+        e.context,
+        r.time,
+        r.memory,
+        r.`code`,
+        e.create_time createTime
+        FROM ysu_exe e
+        LEFT JOIN ysu_exe_result r ON e.exe_id=r.exe_id
+        WHERE e.question_id=#{questionId,jdbcType=VARCHAR} AND e.stu_id=#{stuId,jdbcType=INTEGER}
+    </select>
+
+    <sql id="pageLimit">
+        <if test="pageNo != null and pageSize != null">
+            limit #{pageNo,jdbcType=INTEGER} , #{pageSize,jdbcType=INTEGER}
+        </if>
+    </sql>
+
+
 </mapper>

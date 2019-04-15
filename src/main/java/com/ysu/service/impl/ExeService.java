@@ -2,18 +2,21 @@ package com.ysu.service.impl;
 
 import com.ysu.common.constants.Constants;
 import com.ysu.common.constants.ReturnObject;
-import com.ysu.common.utils.FileUtil;
-import com.ysu.common.utils.GUID;
-import com.ysu.common.utils.PythonUtil;
+import com.ysu.common.utils.*;
 import com.ysu.db.dao.ExeMapper;
 import com.ysu.db.dao.ExeResultMapper;
 import com.ysu.db.pojo.Exe;
 import com.ysu.db.pojo.ExeResult;
 import com.ysu.service.IExeService;
+import com.ysu.vo.ExeInfo;
+import com.ysu.vo.ExeTeacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: han jianguo
@@ -56,5 +59,28 @@ public class ExeService implements IExeService {
         ExeResult exeResult = exeResultMapper.selectByPrimaryKey(exeId);
 
         return SUCCESS.toObject(exeResult);
+    }
+
+    @Override
+    public ReturnObject answer(String questionId, Integer stuId) {
+        Map<String, Object> param = new HashMap<>();
+        param.put("questionId", questionId);
+        param.put("stuId", stuId);
+        List<ExeInfo> list = exeMapper.selectAnswerByQuestionIdAndStuId(param);
+        return SUCCESS.toObject(list);
+    }
+
+    @Override
+    public ReturnObject exeResultList(String questionId, Pager pager) {
+
+        Map<String, Object> param = PagerSearchMapBuilder.on(pager)
+                .append("questionId", questionId).toSearchMap();
+
+        int count = exeMapper.countStudentAnswerByQuestionId(questionId);
+        List<ExeTeacher> list = null;
+        if (count > 0) {
+            list = exeMapper.selectStudentAnswerByQuestionId(param);
+        }
+        return SUCCESS.toObject(pager.toShowPageBean(count, list));
     }
 }
