@@ -46,4 +46,13 @@ public interface ExeMapper {
      * @date: 2019/4/15 15:42
      */
     List<ExeInfo> selectAnswerByQuestionIdAndStuId(Map<String,Object> param);
+
+    /**
+     *
+     * 功能描述: 学生查看自己某次提交的详细记录
+     *
+     * @auther: han jianguo
+     * @date: 2019/4/16 13:43
+     */
+    ExeInfo getExeInfo(String exeId);
 }

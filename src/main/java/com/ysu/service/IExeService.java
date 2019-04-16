@@ -32,6 +32,15 @@ public interface IExeService extends BaseReturnCode {
     ReturnObject answer(String questionId, Integer stuId);
 
     /**
+     *
+     * 功能描述: 学生查看某次自己提交的详细记录
+     *
+     * @auther: han jianguo
+     * @date: 2019/4/16 13:42
+     */
+    ReturnObject answerOne(String exeId);
+
+    /**
      * 功能描述: 教师查看某道题目下学生作答情况
      *
      * @auther: han jianguo

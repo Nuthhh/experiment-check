@@ -71,6 +71,12 @@ public class ExeService implements IExeService {
     }
 
     @Override
+    public ReturnObject answerOne(String exeId) {
+        ExeInfo exeInfo = exeMapper.getExeInfo(exeId);
+        return SUCCESS.toObject(exeInfo);
+    }
+
+    @Override
     public ReturnObject exeResultList(String questionId, Pager pager) {
 
         Map<String, Object> param = PagerSearchMapBuilder.on(pager)

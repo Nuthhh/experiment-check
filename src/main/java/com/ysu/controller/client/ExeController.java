@@ -77,6 +77,25 @@ public class ExeController extends BaseController {
     }
 
     /**
+     * 功能描述: 学生查看自己某次提交的详细情况
+     *
+     * @auther: han jianguo
+     * @date: 2019/4/16 13:40
+     */
+    @RequestMapping("/student/answerOne")
+    public String studentAnswerOne(
+            @RequestParam(value = "exeId", required = false) final String exeId
+    ) {
+        if (checkNull(exeId)) {
+            return PARAM_MISSING_STRING;
+        }
+
+        ReturnObject result = exeService.answerOne(exeId);
+        return json(result);
+    }
+
+
+    /**
      * 功能描述: 教师查看学生作答情况
      *
      * @auther: han jianguo

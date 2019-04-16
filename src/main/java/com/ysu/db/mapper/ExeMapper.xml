@@ -130,6 +130,7 @@
         LEFT JOIN ysu_exe_result r ON e.exe_id = r.exe_id
         WHERE e.question_id = #{questionId,jdbcType=VARCHAR}
         GROUP BY e.stu_id
+        ORDER BY e.stu_id
         <include refid="pageLimit"/>
     </select>
 
@@ -154,6 +155,22 @@
         FROM ysu_exe e
         LEFT JOIN ysu_exe_result r ON e.exe_id=r.exe_id
         WHERE e.question_id=#{questionId,jdbcType=VARCHAR} AND e.stu_id=#{stuId,jdbcType=INTEGER}
+        ORDER BY e.create_time DESC
+    </select>
+    <select id="getExeInfo" resultType="com.ysu.vo.ExeInfo" parameterType="string">
+        SELECT
+        e.exe_id exeId,
+        e.question_id questionId,
+        e.stu_id stuId,
+        e.lang,
+        e.context,
+        r.time,
+        r.memory,
+        r.`code`,
+        e.create_time createTime
+        FROM ysu_exe e
+        LEFT JOIN ysu_exe_result r ON e.exe_id=r.exe_id
+        WHERE e.exe_id=#{exeId,jdbcType=VARCHAR}
     </select>
 
     <sql id="pageLimit">
