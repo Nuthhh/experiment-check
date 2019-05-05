@@ -123,7 +123,7 @@
     <select id="selectStudentAnswerByQuestionId" resultType="com.ysu.vo.ExeTeacher" parameterType="map">
         SELECT
         e.stu_id stuId,
-        if(FIND_IN_SET(0,GROUP_CONCAT(r.`code`))=1,1,0) pass,
+        if(FIND_IN_SET(0,GROUP_CONCAT(r.`code`))&gt;0,1,0) pass,
         COUNT(e.stu_id) submitSum,
         MAX(e.create_time) createTime
         FROM ysu_exe e
